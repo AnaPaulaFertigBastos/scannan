@@ -40,4 +40,46 @@ class UsuarioController extends Controller
             return ResponseHelper::error($e, 401);
         }
     }
+
+    public function login(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => 'required|email',
+                'senha' => 'required'
+            ]);
+
+            $credentials = [
+                'email' => $request->email,
+                'password' => $request->senha
+            ];
+
+            $token = auth('api')->attempt($credentials);
+
+            if (!$token) {
+
+                return ResponseHelper::error('Credenciais inválidas', 401);
+
+            }
+
+            return ResponseHelper::success([
+                'token' => $token
+            ], 'Login realizado');
+        }
+        catch(Exception $e) {
+            return ResponseHelper::error($e->getMessage(), 401);
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            auth('api')->logout();
+
+            return ResponseHelper::success(null, 'Logout realizado');
+        }
+        catch(Exception $e) {
+            return ResponseHelper::error($e->getMessage(), 401);
+        }
+    }
 }

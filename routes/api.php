@@ -11,3 +11,15 @@ use Illuminate\Support\Facades\Route;
   });
 
   Route::post('/registrar', [UsuarioController::class, 'registrar']);
+
+  Route::post('/login', [UsuarioController::class, 'login'])->name('login');
+
+  Route::middleware('auth:api')->group(function () {
+    Route::get('/usuario', function (Request $request) {
+        return response()->json($request);
+    });
+
+    Route::post('/logout', [UsuarioController::class, 'logout']);
+  });
+  
+    

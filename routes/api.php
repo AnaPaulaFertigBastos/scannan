@@ -8,6 +8,7 @@ use App\Http\Controllers\AutorController;
 use App\Http\Controllers\TemaController;
 use App\Http\Controllers\ObraController;
 use App\Http\Controllers\AvaliacaoController;
+use App\Http\Controllers\FavoritoController;
 
   Route::get('/teste', function () {
       return response()->json([
@@ -54,5 +55,9 @@ use App\Http\Controllers\AvaliacaoController;
     Route::get('/avaliacoes/minhas',[AvaliacaoController::class, 'listarMinhasAvaliacoes']);
     Route::put('/avaliacoes/atualizar/{id}',[AvaliacaoController::class, 'atualizar']);
     Route::delete('/avaliacoes/deletar/{id}',[AvaliacaoController::class, 'deletar']);
+
+    Route::post('/favoritos/favoritar/{obraId}', [FavoritoController::class, 'favoritarObra']);
+    Route::delete('/favoritos/remover/{obraId}', [FavoritoController::class, 'removerFavorito']);
+    Route::get('/favoritos/listar', [FavoritoController::class, 'listarFavoritos']);
 });
 

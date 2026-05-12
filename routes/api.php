@@ -1,7 +1,13 @@
 <?php
 
-use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AutorController;
+use App\Http\Controllers\TemaController;
+use App\Http\Controllers\ObraController;
+use App\Http\Controllers\AvaliacaoController;
 
   Route::get('/teste', function () {
       return response()->json([
@@ -24,6 +30,29 @@ use Illuminate\Support\Facades\Route;
     Route::patch('/usuario/atualizar-perfil', [UsuarioController::class, 'atualizarPerfil']);
     Route::get('/usuario/perfil', [UsuarioController::class, 'perfil']);
     Route::delete('/usuario/deletar-conta', [UsuarioController::class, 'deletarConta']);
-  });
-  
-    
+
+    Route::post('/autores/criar', [AutorController::class, 'criar']);
+    Route::get('/autores/listar', [AutorController::class, 'listar']);
+    Route::get('/autores/visualizar/{id}', [AutorController::class, 'visualizar']);
+    Route::put('/autores/atualizar/{id}', [AutorController::class, 'atualizar']);
+    Route::delete('/autores/deletar/{id}', [AutorController::class, 'deletar']);
+
+    Route::post('/temas/criar', [TemaController::class, 'criar']);
+    Route::get('/temas/listar', [TemaController::class, 'listar']);
+    Route::get('/temas/visualizar/{id}', [TemaController::class, 'visualizar']);
+    Route::put('/temas/atualizar/{id}', [TemaController::class, 'atualizar']);
+    Route::delete('/temas/deletar/{id}', [TemaController::class, 'deletar']);
+
+    Route::post('/obras/criar', [ObraController::class, 'criar']);
+    Route::get('/obras/listar', [ObraController::class, 'listarObras']);
+    Route::get('/obras/visualizar/{id}', [ObraController::class, 'visualizarObra']);
+    Route::put('/obras/atualizar/{id}', [ObraController::class, 'atualizar']);
+    Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
+
+    Route::post('/avaliacoes/avaliar',[AvaliacaoController::class, 'avaliar']);
+    Route::get('/avaliacoes/obra/listar/{obraId}',[AvaliacaoController::class, 'listarAvaliacoesObra']);
+    Route::get('/avaliacoes/minhas',[AvaliacaoController::class, 'listarMinhasAvaliacoes']);
+    Route::put('/avaliacoes/atualizar/{id}',[AvaliacaoController::class, 'atualizar']);
+    Route::delete('/avaliacoes/deletar/{id}',[AvaliacaoController::class, 'deletar']);
+});
+

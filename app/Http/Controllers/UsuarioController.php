@@ -37,7 +37,7 @@ class UsuarioController extends Controller
             return ResponseHelper::success($user, 'Usuário criado com sucesso');
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e, 401);
+            return ResponseHelper::error($e->getMessage(), 401);
         }
     }
 

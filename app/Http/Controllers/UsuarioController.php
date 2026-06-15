@@ -58,16 +58,26 @@ class UsuarioController extends Controller
 
             if (!$token) {
 
-                return ResponseHelper::error('Credenciais inválidas', 401);
+                return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao realizar login'
+                ]);
 
             }
 
-            return ResponseHelper::success([
-                'token' => $token
-            ], 'Login realizado');
+            session([
+                'jwt_token' => $token
+            ]);
+
+            return redirect()->route('home');
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao realizar login'
+                ]);
         }
     }
 

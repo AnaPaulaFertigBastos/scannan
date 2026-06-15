@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +10,67 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+:root {
+    --blue: #029296;
+
+    --bg-color: #ffffff;
+    --card-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+
+    --primary-color: #5A31F4;
+}
+
+.btn-scannan {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+
+}
+
+.btn-scannan:hover {
+    background-color: #027275;
+    border-color: #027275;
+    color: #fff;
+}
+
+.text-scannan {
+    color: var(--blue);
+}
+
+.theme-light {
+
+    --bg-color: #ffffff;
+    --card-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+}
+
+.theme-dark {
+
+    --bg-color: #121212;
+    --card-color: #1e1e1e;
+    --text-color: #ffffff;
+    --border-color: #343a40;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.card {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.navbar {
+    background-color: var(--card-color) !important;
+}
+
+.navbar-brand {
+    color: var(--text-color) !important;
 }

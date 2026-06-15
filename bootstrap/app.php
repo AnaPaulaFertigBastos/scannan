@@ -11,10 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectGuestsTo(function () {
-            return null;
-        });
+    ->withMiddleware(function ($middleware) {
+        $middleware->alias([
+            'usuario.autenticado' => \App\Http\Middleware\UsuarioAutenticado::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

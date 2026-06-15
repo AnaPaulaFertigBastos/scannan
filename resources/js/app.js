@@ -1,1 +1,48 @@
-//
+import 'bootstrap';
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const body = document.getElementById('app-body');
+    const button = document.getElementById('theme-toggle');
+
+    const savedTheme =
+        localStorage.getItem('theme') || 'light';
+
+    body.classList.remove(
+        'theme-light',
+        'theme-dark'
+    );
+
+    body.classList.add(`theme-${savedTheme}`);
+
+    button.innerHTML =
+        savedTheme === 'dark'
+            ? '<i id="theme-icon" class="bi bi-sun-fill text-light"></i>'
+            : '<i id="theme-icon" class="bi bi-moon-fill"></i>';
+
+      
+
+    button.addEventListener('click', () => {
+
+        const darkMode =
+            body.classList.contains('theme-dark');
+
+        body.classList.toggle('theme-dark');
+        body.classList.toggle('theme-light');
+
+        const newTheme =
+            darkMode
+                ? 'light'
+                : 'dark';
+
+        localStorage.setItem(
+            'theme',
+            newTheme
+        );
+
+        button.innerHTML =
+            newTheme === 'dark'
+                ? '<i id="theme-icon" class="bi bi-sun-fill text-light"></i>'
+                : '<i id="theme-icon" class="bi bi-moon-fill"></i>';
+    });
+});

@@ -11,11 +11,8 @@ use App\Http\Controllers\FavoritoController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home/login', [HomeController::class, 'login'])
+Route::get('/', [HomeController::class, 'login'])
     ->name('home.login');
 
 Route::post('/usuario/login', [UsuarioController::class, 'login'])

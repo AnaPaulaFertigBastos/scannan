@@ -9,6 +9,9 @@ class HomeController extends Controller
 {
     public function login()
     {
+        if (session()->has('jwt_token')) {
+            return redirect()->route('obras.listar');
+        }
         return view('home.login');
     }
 }

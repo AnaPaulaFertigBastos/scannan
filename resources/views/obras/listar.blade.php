@@ -35,7 +35,13 @@
                     <div class="bg-dark text-white d-flex align-items-center justify-content-center"
                          style="height: 180px; border-radius: 8px 8px 0 0;">
 
-                        <i class="bi bi-book" style="font-size: 3rem;"></i>
+                        @if($obra->tipo === 'Livro')
+                            <i class="bi bi-book" style="font-size: 3rem;"></i>
+                        @elseif($obra->tipo === 'Serie')
+                            <i class="bi bi-tv" style="font-size: 3rem;"></i>
+                        @else
+                            <i class="bi bi-film" style="font-size: 3rem;"></i>
+                        @endif
 
                     </div>
 

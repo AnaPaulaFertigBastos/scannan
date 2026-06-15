@@ -43,7 +43,7 @@ class UsuarioController extends Controller
 
     public function login(Request $request)
     {
-        // try {
+        try {
             $request->validate([
                 'email' => 'required|email',
                 'senha' => 'required'
@@ -71,14 +71,14 @@ class UsuarioController extends Controller
             ]);
 
             return redirect()->route('obras.listar');
-    //     }
-    //     catch(Exception $e) {
-    //         return back()
-    //             ->withInput()
-    //             ->withErrors([
-    //                 'erro' => 'Erro ao realizar login'
-    //             ]);
-    //     }
+        }
+        catch(Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao realizar login'
+                ]);
+        }
      }
 
     public function logout()

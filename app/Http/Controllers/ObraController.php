@@ -70,39 +70,46 @@ public function visualizarObra($id)
     
     public function listarObras(Request $request)
     {
-    try {
-        $query = Obra::query();
+        try {
+            $query = Obra::query();
 
-        //FILTRO POR AUTOR
-        if ($request->has('autor_id')) {
-            $query->where('autor_id',$request->autor_id);
+            //FILTRO POR AUTOR
+            if ($request->has('autor_id')) {
+                $query->where('autor_id',$request->autor_id);
+            }
+
+            //FILTRO POR TEMA
+            if ($request->has('tema_id')) {
+                $query->where('tema_id',$request->tema_id);
+            }
+
+            //MÉDIA DAS AVALIAÇÕES
+            $obras = $query
+                ->withAvg('avaliacoes', 'nota')
+                ->paginate(10)
+                ->withQueryString();
+
+            $obras->transform(function ($obra) {
+                $obra->avaliacoes_avg_nota = round(
+                    $obra->avaliacoes_avg_nota,
+                    1
+                );
+                return $obra;
+            });
+
+            return view('obras.listar', [
+                'title' => 'Obras',
+                'obras' => $obras
+            ]);
         }
-
-        //FILTRO POR TEMA
-        if ($request->has('tema_id')) {
-            $query->where('tema_id',$request->tema_id);
+        catch(Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao carregar obras'
+                ]);
         }
-
-        //MÉDIA DAS AVALIAÇÕES
-        $obras = $query->withAvg(
-            'avaliacoes',
-            'nota'
-        )->get();
-
-        $obras->transform(function ($obra) {
-            $obra->avaliacoes_avg_nota = round(
-                $obra->avaliacoes_avg_nota,
-                1
-            );
-            return $obra;
-        });
-
-        return ResponseHelper::success($obras,'Lista de obras');
     }
-    catch(Exception $e) {
-        return ResponseHelper::error($e->getMessage(),500);
-    }
-}
 
     public function deletar($id)
     {

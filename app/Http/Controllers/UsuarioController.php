@@ -43,7 +43,7 @@ class UsuarioController extends Controller
 
     public function login(Request $request)
     {
-        try {
+        // try {
             $request->validate([
                 'email' => 'required|email',
                 'senha' => 'required'
@@ -70,26 +70,38 @@ class UsuarioController extends Controller
                 'jwt_token' => $token
             ]);
 
-            return redirect()->route('home');
-        }
-        catch(Exception $e) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'erro' => 'Erro ao realizar login'
-                ]);
-        }
-    }
+            return redirect()->route('obras.listar');
+    //     }
+    //     catch(Exception $e) {
+    //         return back()
+    //             ->withInput()
+    //             ->withErrors([
+    //                 'erro' => 'Erro ao realizar login'
+    //             ]);
+    //     }
+     }
 
     public function logout()
     {
         try {
-            auth('api')->logout();
 
-            return ResponseHelper::success(null, 'Logout realizado');
+            $token = session('jwt_token');
+
+            if ($token) {
+                auth('api')
+                    ->setToken($token)
+                    ->logout();
+            }
+
+            session()->forget('jwt_token');
+
+            return redirect()->route('home.login');
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+
+            session()->forget('jwt_token');
+
+            return redirect()->route('home.login');
         }
     }
 

@@ -3,41 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scannan</title>
+    <title>@yield('title','Scannan')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body id="app-body" class="theme-light">
 
-<nav class="navbar navbar-expand-lg bg-white border-bottom">
-    <div class="container">
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <div class="container">
 
-        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-            <img src="{{ asset('images/scannan.png') }}"
-                 alt="Scannan"
-                 style="height: 40px">
+          <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+              <img src="{{ asset('images/scannan.png') }}"
+                  alt="Scannan"
+                  style="height: 40px">
 
-            <span class="fw-bold fs-4">
-                Scannan
-            </span>
-        </a>
+              <span class="fw-bold fs-4">
+                  Scannan
+              </span>
+          </a>
 
-    </div>
-    <div class="ms-auto">
+      </div>
+      <div class="ms-auto">
 
-    <button
-        id="theme-toggle"
-        class="btn">
+        @if(session('jwt_token'))
+            <form action="/usuario/logout" method="POST">
+                @csrf
 
-        
-    </button>
+                <button type="submit" class="btn btn-outline-danger">
+                    Sair
+                </button>
+            </form>
+        @endif
 
-</div>
-</nav>
+        <button
+            id="theme-toggle"
+            class="btn">
 
-<div class="container py-5">
-    @yield('content')
-</div>
+            
+        </button>
+
+      </div>
+  </nav>
+
+  <div class="container py-5">
+      @yield('content')
+  </div>
 
 </body>
 </html>

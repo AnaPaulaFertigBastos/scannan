@@ -34,12 +34,18 @@ class UsuarioController extends Controller
                 'apelido' => $request->apelido,
             ]);
 
-            return ResponseHelper::success($user, 'Usuário criado com sucesso');
+            return redirect()->route('home.login');
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao fazer conta'
+                ]);
         }
     }
+
+    
 
     public function login(Request $request)
     {
@@ -179,6 +185,7 @@ class UsuarioController extends Controller
         }
     }
     
+
     public function deletarConta()
     {
         try {

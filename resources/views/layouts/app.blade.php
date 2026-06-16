@@ -23,7 +23,7 @@
           </a>
 
       </div>
-      <div class="ms-auto">
+      <div class="ms-auto d-flex gap-3">
 
         @if(session('jwt_token'))
             <form action="/usuario/logout" method="POST">
@@ -37,7 +37,7 @@
 
         <button
             id="theme-toggle"
-            class="btn">
+            class="d-flex justify-content-center align-items-center w-0 m-auto btn">
 
             
         </button>

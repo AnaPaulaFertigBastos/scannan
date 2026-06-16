@@ -14,14 +14,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'login'])
     ->name('home.login');
+//FEITO
 
 Route::post('/usuario/login', [UsuarioController::class, 'login'])
     ->name('login');
+//FEITO
+
+Route::post('/usuario/registrar', [UsuarioController::class, 'registrar'])
+    ->name('usuario.registrar');
+//FEITO
+
+Route::get('/registrar', [HomeController::class, 'registrar'])
+    ->name('home.registrar');
+//FEITO
 
 Route::middleware('usuario.autenticado')->group(function () {
 
     Route::post('/usuario/logout', [UsuarioController::class, 'logout'])
         ->name('logout');
+    //FEITO
+    
     Route::patch('/usuario/alterar-senha', [UsuarioController::class, 'alterarSenha']);
     Route::patch('/usuario/atualizar-perfil', [UsuarioController::class, 'atualizarPerfil']);
     Route::get('/usuario/perfil', [UsuarioController::class, 'perfil']);

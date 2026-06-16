@@ -14,4 +14,9 @@ class HomeController extends Controller
         }
         return view('home.login');
     }
+
+    public function registrar()
+    {
+        return view('home.registrar');
+    }
 }

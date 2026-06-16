@@ -79,8 +79,7 @@
 
                         Ainda não possui uma conta?
 
-                        <a href="/cadastro"
-                           class="text-decoration-none fw-semibold text-scannan">
+                        <a href="/registrar" class="text-decoration-none fw-semibold text-scannan">
                             Criar conta
                         </a>
 

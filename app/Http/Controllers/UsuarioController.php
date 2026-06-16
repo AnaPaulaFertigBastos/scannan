@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 use App\Helpers\ResponseHelper;
 use App\Models\Usuario;
@@ -166,10 +167,17 @@ class UsuarioController extends Controller
 
             $user->save();
 
-            return ResponseHelper::success($user, 'Perfil atualizado');
+            return redirect()->route('obras.listar');
         }
-        catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+        catch (ValidationException $e) {
+            throw $e;
+        }
+        catch (Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao realizar alteração'
+                ]);
         }
     }
 
@@ -178,10 +186,14 @@ class UsuarioController extends Controller
         try {
             $user = auth('api')->user();
 
-            return ResponseHelper::success($user, 'Perfil do usuário');
+            return view('usuario.perfil', ['title' => "Perfil", 'user' => $user]);
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao carregar perfil'
+                ]);
         }
     }
     

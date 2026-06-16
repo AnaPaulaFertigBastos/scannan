@@ -23,9 +23,40 @@
           </a>
 
       </div>
-      <div class="ms-auto d-flex gap-3">
+      <div class="ms-auto d-flex align-items-center gap-3">
 
         @if(session('jwt_token'))
+
+            <div class="dropdown">
+
+                <button
+                    class=" dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
+                    Minha Conta
+
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+                        <a class="dropdown-item" href="/usuario/perfil">
+                            Perfil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="/usuario/alterar-senha">
+                            Alterar Senha
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
             <form action="/usuario/logout" method="POST">
                 @csrf
 
@@ -33,16 +64,15 @@
                     Sair
                 </button>
             </form>
+
         @endif
 
         <button
             id="theme-toggle"
-            class="d-flex justify-content-center align-items-center w-0 m-auto btn">
-
-            
+            class="d-flex justify-content-center align-items-center btn">
         </button>
 
-      </div>
+    </div>
   </nav>
 
   <div class="container py-5">

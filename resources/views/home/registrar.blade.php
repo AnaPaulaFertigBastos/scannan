@@ -129,19 +129,39 @@
                             @enderror
                         </div>
 
+                        
+
                         <div class="mb-4">
 
                             <label class="form-label fw-semibold">
                                 Senha
                             </label>
 
-                            <input
-                                type="password"
-                                name="senha"
-                                class="form-control form-control-lg @error('senha') is-invalid @enderror">
-                            
+                            <div class="position-relative">
+
+                                <input
+                                    type="password"
+                                    id="senha"
+                                    name="senha"
+                                    class="form-control form-control-lg pe-5 @error('senha') is-invalid @enderror">
+
+
+                                    
+                                <button
+                                    type="button"
+                                    onclick="mostrarSenha('senha', this)"
+                                    class="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                </button>
+
+                                
+                                
+                            </div>
+
                             @error('senha')
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback d-block">
                                     {{ $message }}
                                 </div>
                             @enderror

@@ -48,7 +48,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="/usuario/alterar-senha">
+                        <a class="dropdown-item" href="/usuario/senha">
                             Alterar Senha
                         </a>
                     </li>

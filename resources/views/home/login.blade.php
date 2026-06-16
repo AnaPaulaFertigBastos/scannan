@@ -48,10 +48,24 @@
                                 Senha
                             </label>
 
-                            <input
-                                type="password"
-                                name="senha"
-                                class="form-control form-control-lg">
+                            <div class="position-relative">
+
+                                <input
+                                    type="password"
+                                    id="senha"
+                                    name="senha"
+                                    class="form-control form-control-lg pe-5">
+
+                                <button
+                                    type="button"
+                                    onclick="mostrarSenha('senha', this)"
+                                    class="btn position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                </button>
+
+                            </div>
 
                         </div>
 

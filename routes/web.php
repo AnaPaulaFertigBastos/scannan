@@ -33,10 +33,11 @@ Route::middleware('usuario.autenticado')->group(function () {
     Route::post('/usuario/logout', [UsuarioController::class, 'logout'])
         ->name('logout');
     //FEITO
-    
+
     Route::patch('/usuario/alterar-senha', [UsuarioController::class, 'alterarSenha']);
     Route::patch('/usuario/atualizar-perfil', [UsuarioController::class, 'atualizarPerfil']);
-    Route::get('/usuario/perfil', [UsuarioController::class, 'perfil']);
+    Route::get('/usuario/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
+    Route::get('/usuario/senha', [UsuarioController::class, 'senha'])->name('usuario.senha');
     Route::delete('/usuario/deletar-conta', [UsuarioController::class, 'deletarConta']);
 
     Route::post('/autores/criar', [AutorController::class, 'criar']);

@@ -132,10 +132,17 @@ class UsuarioController extends Controller
             $user->senha = Hash::make($request->nova_senha);
             $user->save();
 
-            return ResponseHelper::success(null, 'Senha alterada com sucesso');
+            return redirect()->route('obras.listar');
+        }
+        catch (ValidationException $e) {
+            throw $e;
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(), 401);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao alterar senha'
+                ]);
         }
     }
 
@@ -180,6 +187,20 @@ class UsuarioController extends Controller
                 ->withInput()
                 ->withErrors([
                     'erro' => 'Erro ao realizar alteração'
+                ]);
+        }
+    }
+
+    public function senha()
+    {
+        try {
+            return view('usuario.senha', ['title' => 'Alterar senha']);
+        }
+        catch(Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao carregar página'
                 ]);
         }
     }

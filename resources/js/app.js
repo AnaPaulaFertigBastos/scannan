@@ -46,3 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<i id="theme-icon" class="bi bi-moon-fill"></i>';
     });
 });
+window.mostrarSenha = function(id, botao)
+{
+    const campo = document.getElementById(id);
+
+    if (campo.type === 'password') {
+        campo.type = 'text';
+        botao.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+    } else {
+        campo.type = 'password';
+        botao.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    }
+}

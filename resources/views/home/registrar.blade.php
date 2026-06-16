@@ -42,8 +42,13 @@
                                     type="text"
                                     name="nome"
                                     value="{{ old('nome') }}"
-                                    class="form-control form-control-lg">
+                                    class="form-control form-control-lg @error('nome') is-invalid @enderror">
 
+                                @error('nome')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 mb-4">
@@ -56,8 +61,13 @@
                                     type="text"
                                     name="sobrenome"
                                     value="{{ old('sobrenome') }}"
-                                    class="form-control form-control-lg">
+                                    class="form-control form-control-lg @error('sobrenome') is-invalid @enderror">
 
+                                @error('sobrenome')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>
@@ -72,8 +82,13 @@
                                 type="text"
                                 name="apelido"
                                 value="{{ old('apelido') }}"
-                                class="form-control form-control-lg">
+                                class="form-control form-control-lg @error('apelido') is-invalid @enderror">
 
+                            @error('apelido')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
@@ -86,8 +101,13 @@
                                 type="email"
                                 name="email"
                                 value="{{ old('email') }}"
-                                class="form-control form-control-lg">
+                                class="form-control form-control-lg @error('email') is-invalid @enderror">
 
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
@@ -100,8 +120,13 @@
                                 type="date"
                                 name="nascimento"
                                 value="{{ old('nascimento') }}"
-                                class="form-control form-control-lg">
+                                class="form-control form-control-lg @error('nascimento') is-invalid @enderror">
 
+                            @error('nascimento')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
@@ -113,8 +138,13 @@
                             <input
                                 type="password"
                                 name="senha"
-                                class="form-control form-control-lg">
-
+                                class="form-control form-control-lg @error('senha') is-invalid @enderror">
+                            
+                            @error('senha')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <button

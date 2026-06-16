@@ -37,6 +37,9 @@ class UsuarioController extends Controller
 
             return redirect()->route('home.login');
         }
+        catch (ValidationException $e) {
+            throw $e;
+        }
         catch(Exception $e) {
             return back()
                 ->withInput()

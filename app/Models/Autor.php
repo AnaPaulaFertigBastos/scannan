@@ -12,4 +12,11 @@ class Autor extends Model
         'nome'
     ];
 
+    public function obras()
+    {
+        return $this->hasMany(
+            Obra::class,
+            'autor_id'
+        );
+    }
 }

@@ -93,3 +93,37 @@ body {
 .navbar-brand {
     color: var(--text-color) !important;
 }
+
+.navbar a,
+.navbar .dropdown-toggle {
+    color: var(--text-color) !important;
+}
+
+.table {
+    color: var(--text-color);
+}
+
+.table th,
+.table td {
+    color: var(--text-color);
+}
+
+.theme-dark .table {
+    color: #ffffff !important;
+}
+
+.theme-dark .table th,
+.theme-dark .table td {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+.theme-dark .table-striped > tbody > tr:nth-of-type(odd) > * {
+    color: #ffffff !important;
+    background-color: rgba(255,255,255,0.05) !important;
+}
+
+.theme-dark .table-striped > tbody > tr:nth-of-type(even) > * {
+    color: #ffffff !important;
+    background-color: rgba(255,255,255,0.02) !important;
+}

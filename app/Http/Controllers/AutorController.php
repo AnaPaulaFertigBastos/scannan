@@ -97,4 +97,79 @@ class AutorController extends Controller
             return ResponseHelper::error($e->getMessage(),500);
         }
     }
+
+    public function listarTela()
+    {
+        $autores = Autor::orderBy('nome')->get();
+
+        return view('autores.listar', compact('autores'));
+    }
+
+    public function formCriar()
+    {
+        return view('autores.criar');
+    }
+
+    public function salvarTela(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required|max:255'
+        ]);
+
+        Autor::create([
+            'nome' => $request->nome
+        ]);
+
+        return redirect()
+            ->route('autores.listar')
+            ->with('success', 'Autor criado com sucesso!');
+    }
+
+    public function formEditar($id)
+    {
+        $autor = Autor::findOrFail($id);
+
+        return view('autores.editar', compact('autor'));
+    }
+
+    public function salvarEdicao(Request $request, $id)
+    {
+        $request->validate([
+            'nome' => 'required|max:255'
+        ]);
+
+        $autor = Autor::findOrFail($id);
+
+        $autor->update([
+            'nome' => $request->nome
+        ]);
+
+        return redirect()
+            ->route('autores.listar')
+            ->with('success', 'Autor atualizado com sucesso!');
+    }
+
+    public function deletarTela($id)
+    {
+        $autor = Autor::findOrFail($id);
+
+        if ($autor->obras()->exists()) {
+
+            return redirect()
+                ->route('autores.listar')
+                ->with(
+                    'error',
+                    'Não é possível excluir um autor que possui obras vinculadas.'
+                );
+        }
+
+        $autor->delete();
+
+        return redirect()
+            ->route('autores.listar')
+            ->with(
+                'success',
+                'Autor excluído com sucesso!'
+            );
+    }
 }

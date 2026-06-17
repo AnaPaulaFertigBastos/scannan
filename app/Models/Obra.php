@@ -18,7 +18,21 @@ class Obra extends Model
         'autor_id',
         'tema_id'
     ];
+    public function autor()
+    {
+        return $this->belongsTo(
+            Autor::class,
+            'autor_id'
+        );
+    }
 
+    public function tema()
+    {
+        return $this->belongsTo(
+            Tema::class,
+            'tema_id'
+        );
+    }
     public function avaliacoes()
 {
     return $this->hasMany(

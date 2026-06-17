@@ -1,5 +1,7 @@
 import 'bootstrap';
 
+
+// Tema escuro / claro
 document.addEventListener('DOMContentLoaded', () => {
 
     const body = document.getElementById('app-body');
@@ -46,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<i id="theme-icon" class="bi bi-moon-fill"></i>';
     });
 });
+
+// Visualizar senha
 window.mostrarSenha = function(id, botao)
 {
     const campo = document.getElementById(id);

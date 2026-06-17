@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
 use App\Models\Obra;
+use App\Models\Autor;
+use App\Models\Tema;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
 use Exception;
 class ObraController extends Controller
 {
     public function criar(Request $request)
     {
         try {
+           
             $request->validate([
                 'titulo' => 'required|string|max:255',
                 'tipo' => 'required|in:Filme,Serie,Livro',
@@ -42,7 +47,28 @@ class ObraController extends Controller
             return back()
                 ->withInput()
                 ->withErrors([
-                    'erro' => 'Erro ao realizar criar obra'
+                    'erro' => 'Erro ao realizar criar obra '
+                ]);
+        }
+    }
+
+    public function criarView()
+    {
+        try {
+            $autores = Autor::orderBy('nome')->get();
+            $temas = Tema::orderBy('descricao')->get();
+
+            return view('obras.criar', [
+                'title' => 'Criar Obra',
+                'autores' => $autores,
+                'temas' => $temas
+            ]);
+        }
+        catch(Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao carregar formulário de criação de obra'
                 ]);
         }
     }
@@ -115,9 +141,12 @@ class ObraController extends Controller
                 return $obra;
             });
 
+            
+
             return view('obras.listar', [
                 'title' => 'Obras',
-                'obras' => $obras
+                'obras' => $obras,
+                
             ]);
         }
         catch(Exception $e) {

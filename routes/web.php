@@ -68,6 +68,8 @@ Route::middleware('usuario.autenticado')->group(function () {
     Route::get('/obras/visualizar/{id}', [ObraController::class, 'visualizarObra'])->name('obras.visualizar');
     //FEITO
 
+    Route::get('/obras/criar', [ObraController::class, 'criarView'])->name('obras.criar');
+
     Route::put('/obras/atualizar/{id}', [ObraController::class, 'atualizar']);
     Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
 

@@ -6,7 +6,22 @@
 
 <div class="container">
 
-    <h2 class="mb-4">Obras</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="mb-0">
+            Obras
+        </h2>
+
+        <a href="{{ route('obras.criar') }}"
+            class="btn btn-scannan"
+            >
+
+            <i class="bi bi-plus-lg"></i>
+            Nova Obra
+
+        </a>
+
+    </div>
 
     @if($errors->any())
         <div class="alert alert-danger">

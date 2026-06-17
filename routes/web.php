@@ -118,6 +118,9 @@ Route::middleware('usuario.autenticado')->group(function () {
 
     Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
 
+    Route::delete('/obras/excluir/{id}', [ObraController::class, 'deletarTela'])
+        ->name('obras.deletar');
+
     Route::post('/avaliacoes/avaliar',[AvaliacaoController::class, 'avaliar']);
     Route::get('/avaliacoes/obra/listar/{obraId}',[AvaliacaoController::class, 'listarAvaliacoesObra']);
     Route::get('/avaliacoes/minhas',[AvaliacaoController::class, 'listarMinhasAvaliacoes']);

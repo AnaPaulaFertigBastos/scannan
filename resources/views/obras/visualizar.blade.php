@@ -48,9 +48,21 @@
                 {{-- DADOS --}}
                 <div class="col-md-9">
 
-                    <h1 class="fw-bold mb-2">
-                        {{ $obra->titulo }}
-                    </h1>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+
+                      <h1 class="fw-bold m-0">
+                          {{ $obra->titulo }}
+                      </h1>
+
+                      <a href="{{ route('obras.alterar', $obra->id) }}"
+                        class="btn btn-outline-primary btn-sm">
+
+                          <i class="bi bi-pencil"></i>
+                          Alterar
+
+                      </a>
+
+                  </div>
 
                     <span class="badge bg-secondary mb-3">
                         {{ $obra->tipo }}

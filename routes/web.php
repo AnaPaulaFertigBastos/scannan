@@ -69,8 +69,13 @@ Route::middleware('usuario.autenticado')->group(function () {
     //FEITO
 
     Route::get('/obras/criar', [ObraController::class, 'criarView'])->name('obras.criar');
+    //FEITO 
 
     Route::put('/obras/atualizar/{id}', [ObraController::class, 'atualizar']);
+    //FEITO 
+    
+    Route::get('/obras/alterar/{id}', [ObraController::class, 'alterarView'])->name('obras.alterar');
+
     Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
 
     Route::post('/avaliacoes/avaliar',[AvaliacaoController::class, 'avaliar']);

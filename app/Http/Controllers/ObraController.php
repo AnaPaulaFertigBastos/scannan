@@ -182,7 +182,11 @@ class ObraController extends Controller
             $obra = Obra::find($id);
 
             if (!$obra) {
-                return ResponseHelper::error('Obra não encontrada',404);
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'erro' => 'Obra não encontrada'
+                    ]);
             }
 
             $request->validate([
@@ -198,10 +202,49 @@ class ObraController extends Controller
 
             $obra->update($request->all());
 
-            return ResponseHelper::success($obra,'Obra atualizada com sucesso');
+            return redirect()->route('obras.visualizar', ['id' => $obra->id]);
+        }
+        catch (ValidationException $e) {
+            throw $e;
+        }
+        catch (Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao alterar obra'
+                ]);
+        }
+    }
+
+    public function alterarView($obraId)
+    {
+        try {
+            $obra = Obra::find($obraId);
+
+            if (!$obra) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'erro' => 'Obra não encontrada'
+                    ]);
+            }
+
+            $autores = Autor::orderBy('nome')->get();
+            $temas = Tema::orderBy('descricao')->get();
+
+            return view('obras.alterar', [
+                'title' => 'Alterar Obra',
+                'autores' => $autores,
+                'temas' => $temas,
+                'obra' => $obra
+            ]);
         }
         catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(),500);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao carregar formulário de alteração de obra'
+                ]);
         }
     }
 

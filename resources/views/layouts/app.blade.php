@@ -95,7 +95,8 @@
                         </button>
 
                     </form>
-
+            @endif
+            
                     <button
                         id="theme-toggle"
                         class="btn d-flex justify-content-center align-items-center">
@@ -103,7 +104,7 @@
 
                 </div>
 
-            @endif
+            
 
         </div>
 

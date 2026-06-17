@@ -29,52 +29,51 @@
 
             <div class="col-6 col-md-4 col-lg-3">
 
-                <div class="card border-0 shadow-sm h-100">
+                <a href="/obras/visualizar/{{ $obra->id }}"
+                class="text-decoration-none">
 
-                    {{-- CAPA --}}
-                    <div class="bg-dark text-white d-flex align-items-center justify-content-center"
-                         style="height: 180px; border-radius: 8px 8px 0 0;">
+                    <div class="card border-0 shadow-sm h-100">
 
-                        @if($obra->tipo === 'Livro')
-                            <i class="bi bi-book" style="font-size: 3rem;"></i>
-                        @elseif($obra->tipo === 'Serie')
-                            <i class="bi bi-tv" style="font-size: 3rem;"></i>
-                        @else
-                            <i class="bi bi-film" style="font-size: 3rem;"></i>
-                        @endif
+                        <div class="bg-dark text-white d-flex align-items-center justify-content-center"
+                            style="height: 180px; border-radius: 8px 8px 0 0;">
 
-                    </div>
-
-                    <div class="card-body text-center">
-
-                        {{-- TÍTULO --}}
-                        <h6 class="fw-bold mb-2">
-                            {{ $obra->titulo }}
-                        </h6>
-
-                        {{-- ESTRELAS --}}
-                        <div class="text-warning">
-
-                            {{-- estrelas cheias --}}
-                            @for($i = 0; $i < $cheias; $i++)
-                                <i class="bi bi-star-fill"></i>
-                            @endfor
-
-                            {{-- meia estrela --}}
-                            @if($meia)
-                                <i class="bi bi-star-half"></i>
+                            @if($obra->tipo === 'Livro')
+                                <i class="bi bi-book" style="font-size: 3rem;"></i>
+                            @elseif($obra->tipo === 'Serie')
+                                <i class="bi bi-tv" style="font-size: 3rem;"></i>
+                            @else
+                                <i class="bi bi-film" style="font-size: 3rem;"></i>
                             @endif
 
-                            {{-- vazias --}}
-                            @for($i = 0; $i < $vazias; $i++)
-                                <i class="bi bi-star"></i>
-                            @endfor
+                        </div>
+
+                        <div class="card-body text-center">
+
+                            <h6 class="fw-bold mb-2">
+                                {{ $obra->titulo }}
+                            </h6>
+
+                            <div class="text-warning">
+
+                                @for($i = 0; $i < $cheias; $i++)
+                                    <i class="bi bi-star-fill"></i>
+                                @endfor
+
+                                @if($meia)
+                                    <i class="bi bi-star-half"></i>
+                                @endif
+
+                                @for($i = 0; $i < $vazias; $i++)
+                                    <i class="bi bi-star"></i>
+                                @endfor
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
+                </a>
 
             </div>
 

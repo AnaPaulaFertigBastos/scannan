@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Exception;
 class ObraController extends Controller
 {
-public function criar(Request $request)
+    public function criar(Request $request)
     {
         try {
             $request->validate([
@@ -33,25 +33,37 @@ public function criar(Request $request)
                 'tema_id' => $request->tema_id
             ]);
 
-            return ResponseHelper::success($obra,'Obra criada com sucesso');
+            return redirect()->route('obras.listar');
         }
-        catch(Exception $e) {
-            return ResponseHelper::error($e->getMessage(),500);
+        catch (ValidationException $e) {
+            throw $e;
+        }
+        catch (Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'erro' => 'Erro ao realizar criar obra'
+                ]);
         }
     }
 
-public function visualizarObra($id)
+    public function visualizarObra($id)
     {
         try {
         $obra = Obra::find($id);
 
         if (!$obra) {
-            return ResponseHelper::error('Obra não encontrada',404);
+            return back()
+                    ->withInput()
+                    ->withErrors([
+                        'erro' => 'Obra não encontrada'
+                    ]);
+           
         }
 
         //CALCULAR MÉDIA
         $notaMedia = $obra->avaliacoes()
-                          ->avg('nota');
+                        ->avg('nota');
 
         //ADICIONA A MÉDIA AO OBJETO
         $obra->nota_media = round(
@@ -59,13 +71,19 @@ public function visualizarObra($id)
             1
         );
 
-        return ResponseHelper::success($obra,'Obra encontrada'
-        );
+        return view('obras.visualizar', [
+                'title' => $obra->titulo,
+                'obra' => $obra
+            ]);
+        }
+        catch(Exception $e) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'erro' => 'Erro ao carregar obra'
+                    ]);
+            }
     }
-    catch(Exception $e) {
-        return ResponseHelper::error($e->getMessage(),500);
-    }
-}
 
     
     public function listarObras(Request $request)

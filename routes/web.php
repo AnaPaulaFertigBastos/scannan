@@ -35,9 +35,17 @@ Route::middleware('usuario.autenticado')->group(function () {
     //FEITO
 
     Route::patch('/usuario/alterar-senha', [UsuarioController::class, 'alterarSenha']);
+    //FEITO
+
     Route::patch('/usuario/atualizar-perfil', [UsuarioController::class, 'atualizarPerfil']);
+    //FEITO
+
     Route::get('/usuario/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
+    //FEITO
+
     Route::get('/usuario/senha', [UsuarioController::class, 'senha'])->name('usuario.senha');
+    //FEITO
+
     Route::delete('/usuario/deletar-conta', [UsuarioController::class, 'deletarConta']);
 
     Route::post('/autores/criar', [AutorController::class, 'criar']);
@@ -53,8 +61,13 @@ Route::middleware('usuario.autenticado')->group(function () {
     Route::delete('/temas/deletar/{id}', [TemaController::class, 'deletar']);
 
     Route::post('/obras/criar', [ObraController::class, 'criar']);
+    //FEITO
     Route::get('/obras/listar', [ObraController::class, 'listarObras'])->name('obras.listar');
-    Route::get('/obras/visualizar/{id}', [ObraController::class, 'visualizarObra']);
+    //FEITO
+
+    Route::get('/obras/visualizar/{id}', [ObraController::class, 'visualizarObra'])->name('obras.visualizar');
+    //FEITO
+
     Route::put('/obras/atualizar/{id}', [ObraController::class, 'atualizar']);
     Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
 

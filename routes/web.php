@@ -34,6 +34,46 @@ Route::middleware('usuario.autenticado')->group(function () {
         ->name('logout');
     //FEITO
 
+    Route::get('/autores', [AutorController::class, 'listarTela'])
+        ->name('autores.listar');
+
+    Route::get('/autores/criar', [AutorController::class, 'formCriar'])
+        ->name('autores.criar.form');
+
+    Route::post('/autores/salvar', [AutorController::class, 'salvarTela'])
+        ->name('autores.salvar');
+
+    Route::get('/autores/editar/{id}', [AutorController::class, 'formEditar'])
+        ->name('autores.editar.form');
+
+    Route::put('/autores/salvar-edicao/{id}', [AutorController::class, 'salvarEdicao'])
+        ->name('autores.salvar.edicao');
+
+    Route::delete('/autores/deletar/{id}', [AutorController::class, 'deletar']);
+
+    Route::delete('/autores/excluir/{id}', [AutorController::class, 'deletarTela'])
+        ->name('autores.deletar');
+
+    Route::get('/temas', [TemaController::class, 'listarTela'])
+        ->name('temas.listar');
+
+    Route::get('/temas/criar', [TemaController::class, 'formCriar'])
+        ->name('temas.criar.form');
+
+    Route::post('/temas/salvar', [TemaController::class, 'salvarTela'])
+        ->name('temas.salvar');
+
+    Route::get('/temas/editar/{id}', [TemaController::class, 'formEditar'])
+        ->name('temas.editar.form');
+
+    Route::put('/temas/salvar-edicao/{id}', [TemaController::class, 'salvarEdicao'])
+        ->name('temas.salvar.edicao');
+
+    Route::delete('/temas/deletar/{id}', [TemaController::class, 'deletar']);
+    
+    Route::delete('/temas/excluir/{id}', [TemaController::class, 'deletarTela'])
+        ->name('temas.deletar');
+
     Route::patch('/usuario/alterar-senha', [UsuarioController::class, 'alterarSenha']);
     //FEITO
 
@@ -48,17 +88,17 @@ Route::middleware('usuario.autenticado')->group(function () {
 
     Route::delete('/usuario/deletar-conta', [UsuarioController::class, 'deletarConta']);
 
-    Route::post('/autores/criar', [AutorController::class, 'criar']);
+   /* Route::post('/autores/criar', [AutorController::class, 'criar']);
     Route::get('/autores/listar', [AutorController::class, 'listar']);
     Route::get('/autores/visualizar/{id}', [AutorController::class, 'visualizar']);
     Route::put('/autores/atualizar/{id}', [AutorController::class, 'atualizar']);
-    Route::delete('/autores/deletar/{id}', [AutorController::class, 'deletar']);
+    Route::delete('/autores/deletar/{id}', [AutorController::class, 'deletar']);*/
 
-    Route::post('/temas/criar', [TemaController::class, 'criar']);
+   /* Route::post('/temas/criar', [TemaController::class, 'criar']);
     Route::get('/temas/listar', [TemaController::class, 'listar']);
     Route::get('/temas/visualizar/{id}', [TemaController::class, 'visualizar']);
     Route::put('/temas/atualizar/{id}', [TemaController::class, 'atualizar']);
-    Route::delete('/temas/deletar/{id}', [TemaController::class, 'deletar']);
+    Route::delete('/temas/deletar/{id}', [TemaController::class, 'deletar']);*/
 
     Route::post('/obras/criar', [ObraController::class, 'criar']);
     //FEITO

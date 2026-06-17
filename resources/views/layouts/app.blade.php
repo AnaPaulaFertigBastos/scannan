@@ -3,81 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title','Scannan')</title>
+    <title>@yield('title', 'Scannan')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body id="app-body" class="theme-light">
 
-  <nav class="navbar navbar-expand-lg bg-white border-bottom">
-      <div class="container">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
 
-          <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-              <img src="{{ asset('images/scannan.png') }}"
-                  alt="Scannan"
-                  style="height: 40px">
+        <div class="container">
 
-              <span class="fw-bold fs-4">
-                  Scannan
-              </span>
-          </a>
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <img
+                    src="{{ asset('images/scannan.png') }}"
+                    alt="Scannan"
+                    style="height: 40px">
 
-      </div>
-      <div class="ms-auto d-flex align-items-center gap-3">
+                <span class="fw-bold fs-4">
+                    Scannan
+                </span>
+            </a>
 
-        @if(session('jwt_token'))
+            @if(session('jwt_token'))
 
-            <div class="dropdown">
+                <div class="d-flex align-items-center gap-4 ms-auto">
 
-                <button
-                    class=" dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                    <a
+                        href="{{ route('autores.listar') }}"
+                        class="text-decoration-none text-dark fw-semibold">
 
-                    Minha Conta
+                        Autores
 
-                </button>
+                    </a>
 
-                <ul class="dropdown-menu dropdown-menu-end">
+                    <a
+                        href="{{ route('temas.listar') }}"
+                        class="text-decoration-none text-dark fw-semibold">
 
-                    <li>
-                        <a class="dropdown-item" href="/usuario/perfil">
-                            Perfil
-                        </a>
-                    </li>
+                        Temas
 
-                    <li>
-                        <a class="dropdown-item" href="/usuario/senha">
-                            Alterar Senha
-                        </a>
-                    </li>
+                    </a>
 
-                </ul>
+                    <div class="dropdown">
 
-            </div>
+                        <button
+                            class="btn dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
 
-            <form action="/usuario/logout" method="POST">
-                @csrf
+                            Minha Conta
 
-                <button type="submit" class="btn btn-outline-danger">
-                    Sair
-                </button>
-            </form>
+                        </button>
 
-        @endif
+                        <ul class="dropdown-menu dropdown-menu-end">
 
-        <button
-            id="theme-toggle"
-            class="d-flex justify-content-center align-items-center btn">
-        </button>
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="{{ route('usuario.perfil') }}">
 
+                                    Perfil
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="{{ route('usuario.senha') }}">
+
+                                    Alterar Senha
+
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <form action="{{ route('logout') }}" method="POST">
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="btn btn-outline-danger">
+
+                            Sair
+
+                        </button>
+
+                    </form>
+
+                    <button
+                        id="theme-toggle"
+                        class="btn d-flex justify-content-center align-items-center">
+                    </button>
+
+                </div>
+
+            @endif
+
+        </div>
+
+    </nav>
+
+        <div class="container mt-3">
+
+            @if(session('success'))
+
+                <div class="alert alert-success alert-dismissible fade show auto-close-alert">
+
+                    {{ session('success') }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+            @endif
+
+            @if(session('error'))
+
+                <div class="alert alert-danger alert-dismissible fade show auto-close-alert">
+
+                    {{ session('error') }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+            @endif
+
+        </div>
+
+    <div class="container py-5">
+        @yield('content')
     </div>
-  </nav>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.querySelectorAll('.form-excluir').forEach(form => {
 
-  <div class="container py-5">
-      @yield('content')
-  </div>
+        form.addEventListener('submit', function(e) {
 
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Confirmar exclusão',
+                text: 'Esta ação não poderá ser desfeita.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#029296',
+                cancelButtonColor: '#dc3545',
+                confirmButtonText: 'Sim, excluir',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+
+            });
+
+        });
+
+    });
+    </script>
+    <script>
+
+    setTimeout(() => {
+
+        document
+            .querySelectorAll('.auto-close-alert')
+            .forEach(alert => {
+
+                alert.classList.remove('show');
+
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+
+            });
+
+    }, 3000);
+
+    </script>
 </body>
 </html>

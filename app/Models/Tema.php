@@ -11,4 +11,12 @@ class Tema extends Model
     protected $fillable = [
         'descricao'
     ];
+
+    public function obras()
+    {
+        return $this->hasMany(
+            Obra::class,
+            'tema_id'
+        );
+    }
 }

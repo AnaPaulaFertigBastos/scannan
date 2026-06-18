@@ -6,6 +6,7 @@ use App\Helpers\ResponseHelper;
 use App\Models\Obra;
 use App\Models\Autor;
 use App\Models\Tema;
+use App\Models\Favorito;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -97,10 +98,26 @@ class ObraController extends Controller
             1
         );
 
+        $token = session('jwt_token');
+
+        auth('api')->setToken($token);
+        $usuario = auth('api')->user();
+
+        $favoritado = Favorito::where(
+                'usuario_id',
+                $usuario->id
+            )
+            ->where(
+                'obra_id',
+                $obra->id
+            )
+            ->exists();
+
         return view('obras.visualizar', [
-                'title' => $obra->titulo,
-                'obra' => $obra
-            ]);
+            'title' => $obra->titulo,
+            'obra' => $obra,
+            'favoritado' => $favoritado
+        ]);
         }
         catch(Exception $e) {
                 return back()

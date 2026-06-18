@@ -50,19 +50,91 @@
 
                     <div class="d-flex align-items-center gap-2 mb-2">
 
-                      <h1 class="fw-bold m-0">
-                          {{ $obra->titulo }}
-                      </h1>
+                    <h1 class="fw-bold m-0">
+                        {{ $obra->titulo }}
+                    </h1>
 
-                      <a href="{{ route('obras.alterar', $obra->id) }}"
+                    <a
+                        href="{{ route('obras.alterar', $obra->id) }}"
                         class="btn btn-outline-primary btn-sm">
 
-                          <i class="bi bi-pencil"></i>
-                          Alterar
+                        <i class="bi bi-pencil"></i>
+                        Alterar
 
-                      </a>
+                    </a>
 
-                  </div>
+                    @if($favoritado)
+
+                        <form
+                            action="{{ route('favoritos.excluir', $obra->id) }}"
+                            method="POST"
+                            class="d-inline">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                type="submit"
+                                class="btn border-0 bg-transparent p-0 favorito-btn">
+
+                                <i
+                                    class="bi bi-heart-fill text-danger"
+                                    style="font-size: 1.8rem;">
+                                </i>
+
+                            </button>
+
+                        </form>
+
+                    @else
+
+                        <form
+                            action="{{ route('favoritos.salvar', $obra->id) }}"
+                            method="POST"
+                            class="d-inline">
+
+                            @csrf
+
+                            <button
+                                type="submit"
+                                class="btn border-0 bg-transparent p-0 favorito-btn">
+
+                                <i
+                                    class="bi bi-heart"
+                                    style="font-size: 1.8rem;">
+                                </i>
+
+                            </button>
+
+                        </form>
+
+                    @endif
+
+                    @if(session('favorito_sucesso'))
+
+                        <span
+                            id="mensagem-favorito"
+                            class="ms-1 text-pink fw-semibold">
+
+                            Favoritado
+
+                        </span>
+
+                    @endif
+
+                    @if(session('favorito_removido'))
+
+                        <span
+                            id="mensagem-favorito"
+                            class="ms-1 text-secondary fw-semibold">
+
+                            Removido
+
+                        </span>
+
+                    @endif
+
+                </div>
 
                     <span class="badge bg-secondary mb-3">
                         {{ $obra->tipo }}
@@ -143,5 +215,23 @@
     </div>
 
 </div>
+    <script>
 
+    setTimeout(() => {
+
+        const mensagem =
+            document.getElementById('mensagem-favorito');
+
+        if (mensagem) {
+
+            mensagem.style.transition =
+                'opacity 0.5s ease';
+
+            mensagem.style.opacity = '0';
+
+        }
+
+    }, 2000);
+
+    </script>
 @endsection

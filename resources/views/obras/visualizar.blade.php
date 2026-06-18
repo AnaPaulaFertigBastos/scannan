@@ -62,6 +62,14 @@
 
                       </a>
 
+                      <a href="{{ route('avaliacoes.obra', $obra->id) }}"
+                        class="btn btn-outline-warning btn-sm">
+
+                            <i class="bi bi-star"></i>
+                            Avaliações
+
+                        </a>
+
                   </div>
 
                     <span class="badge bg-secondary mb-3">

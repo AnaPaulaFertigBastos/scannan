@@ -115,6 +115,7 @@ Route::middleware('usuario.autenticado')->group(function () {
     //FEITO 
     
     Route::get('/obras/alterar/{id}', [ObraController::class, 'alterarView'])->name('obras.alterar');
+    //FEITO 
 
     Route::delete('/obras/deletar/{id}', [ObraController::class, 'deletar']);
 
@@ -122,9 +123,24 @@ Route::middleware('usuario.autenticado')->group(function () {
         ->name('obras.deletar');
 
     Route::post('/avaliacoes/avaliar',[AvaliacaoController::class, 'avaliar']);
-    Route::get('/avaliacoes/obra/listar/{obraId}',[AvaliacaoController::class, 'listarAvaliacoesObra']);
+    //FEITO 
+
+    Route::get('/avaliacoes/criar/{obraId}',[AvaliacaoController::class, 'avaliarView'])->name('avaliacoes.criar');
+    //FEITO 
+
+    Route::get('/avaliacoes/obra/listar/{obraId}',[AvaliacaoController::class, 'listarAvaliacoesObra'])->name('avaliacoes.obra');
+    //FEITO 
+
     Route::get('/avaliacoes/minhas',[AvaliacaoController::class, 'listarMinhasAvaliacoes']);
     Route::put('/avaliacoes/atualizar/{id}',[AvaliacaoController::class, 'atualizar']);
+    //FEITO 
+
+
+    Route::get('/avaliacoes/atualizar/{id}',[AvaliacaoController::class, 'atualizarView'])->name('avaliacoes.atualizar');
+    //FEITO 
+
+
+
     Route::delete('/avaliacoes/deletar/{id}',[AvaliacaoController::class, 'deletar']);
 
     Route::post('/favoritos/favoritar/{obraId}', [FavoritoController::class, 'favoritarObra']);

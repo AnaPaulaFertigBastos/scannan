@@ -50,20 +50,21 @@
 
                     <div class="d-flex align-items-center gap-2 mb-2">
 
-                    <h1 class="fw-bold m-0">
-                        {{ $obra->titulo }}
-                    </h1>
+                        <h1 class="fw-bold m-0">
+                            {{ $obra->titulo }}
+                        </h1>
 
-                    <a
-                        href="{{ route('obras.alterar', $obra->id) }}"
-                        class="btn btn-outline-primary btn-sm">
+                      <a
+                            href="{{ route('obras.alterar', $obra->id) }}"
+                            class="btn btn-outline-primary btn-sm">
 
-                        <i class="bi bi-pencil"></i>
-                        Alterar
+                            <i class="bi bi-pencil"></i>
+                            Alterar
 
-                    </a>
+                        </a>
+                        
 
-                    @if($favoritado)
+                   @if($favoritado)
 
                         <form
                             action="{{ route('favoritos.excluir', $obra->id) }}"

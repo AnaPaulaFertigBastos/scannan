@@ -265,4 +265,27 @@ class ObraController extends Controller
         }
     }
 
+    public function deletarTela($id)
+    {
+        $obra = Obra::findOrFail($id);
+
+        if ($obra->avaliacoes()->exists()) {
+
+            return redirect()
+                ->route('obras.listar')
+                ->with(
+                    'error',
+                    'Não é possível excluir uma obra que possui avaliações.'
+                );
+        }
+
+        $obra->delete();
+
+        return redirect()
+            ->route('obras.listar')
+            ->with(
+                'success',
+                'Obra excluída com sucesso!'
+            );
+    }
 }

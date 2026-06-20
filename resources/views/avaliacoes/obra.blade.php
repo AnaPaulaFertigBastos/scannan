@@ -99,9 +99,11 @@
 
                             </a>
 
-                            <form method="POST"
-                                  {{-- action="/avaliacoes/deletar/{{ $avaliacao->id }}" --}}
-                                  onsubmit="return confirm('Deseja excluir esta avaliação?')">
+                             
+                            <form
+                                action="{{ route('avaliacoes.deletar', $avaliacao->id) }}"
+                                method="POST"
+                                class="form-excluir m-0">
 
                                 @csrf
                                 @method('DELETE')
@@ -116,6 +118,8 @@
                                 </button>
 
                             </form>
+
+                            
 
                         </div>
 

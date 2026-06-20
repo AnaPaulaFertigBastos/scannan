@@ -188,8 +188,7 @@
         });
 
     });
-    </script>
-    <script>
+
 
     setTimeout(() => {
 

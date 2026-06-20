@@ -131,6 +131,9 @@ Route::middleware('usuario.autenticado')->group(function () {
     Route::get('/avaliacoes/obra/listar/{obraId}',[AvaliacaoController::class, 'listarAvaliacoesObra'])->name('avaliacoes.obra');
     //FEITO 
 
+    Route::delete('/avaliacoes/excluir/{id}', [AvaliacaoController::class, 'deletarTela'])
+        ->name('avaliacoes.deletar');
+
     Route::get('/avaliacoes/minhas',[AvaliacaoController::class, 'listarMinhasAvaliacoes']);
     Route::put('/avaliacoes/atualizar/{id}',[AvaliacaoController::class, 'atualizar']);
     //FEITO 

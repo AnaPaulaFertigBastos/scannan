@@ -183,6 +183,34 @@ class AvaliacaoController extends Controller
             return ResponseHelper::error($e->getMessage(),500);
         }
     }
+
+    public function deletarTela($id)
+    {
+
+        $usuario = auth('api')->user();
+        $avaliacao = Avaliacao::findOrFail($id);
+
+        $obraId = $avaliacao->obra_id;
+
+        if ($avaliacao->usuario_id != $usuario->id) {
+            return redirect()
+            ->route('avaliacoes.obra', $obraId)
+            ->with(
+                'error',
+                'Não é possível excluir a avaliação de outro usuário'
+            );
+        }
+
+        $avaliacao->delete();
+
+        return redirect()
+            ->route('avaliacoes.obra', $obraId)
+            ->with(
+                'success',
+                'Avaliação excluída com sucesso!'
+            );
+    }
+    
     public function atualizar(Request $request, $id)
     {
         try {

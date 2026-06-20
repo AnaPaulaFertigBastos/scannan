@@ -147,4 +147,13 @@ Route::middleware('usuario.autenticado')->group(function () {
     Route::delete('/favoritos/remover/{obraId}', [FavoritoController::class, 'removerFavorito']);
     Route::get('/favoritos/listar', [FavoritoController::class, 'listarFavoritos']);
 
+    Route::post('/favoritos/salvar/{obraId}', [FavoritoController::class, 'favoritarTela'])
+        ->name('favoritos.salvar');
+
+    Route::delete('/favoritos/excluir/{obraId}', [FavoritoController::class, 'removerTela'])
+        ->name('favoritos.excluir');
+
+    Route::get('/favoritos',[FavoritoController::class, 'listarTela'])
+        ->name('favoritos.listar');
+
 });

@@ -46,52 +46,78 @@
                 </div>
 
                 {{-- DADOS --}}
-                <div class="col-md-9">
+                <div class="col-md-9" >
 
-                    <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex justify-content-between mb-2">
 
-                        <h1 class="fw-bold m-0">
-                            {{ $obra->titulo }}
-                        </h1>
+                        <div class="">
+                            <h1 class="fw-bold m-0">
+                                {{ Str::limit($obra->titulo, 22) }}
+                            </h1>
+                        </div>
 
-                        <a
-                            href="{{ route('obras.alterar', $obra->id) }}"
-                            class="btn btn-outline-primary btn-sm">
-
-                            <i class="bi bi-pencil"></i>
-                            Alterar
-
-                        </a>
-
-                        <a href="{{ route('avaliacoes.obra', $obra->id) }}"
-                        class="btn btn-outline-warning btn-sm">
-
-                            <i class="bi bi-star"></i>
-                            Avaliações
-
-                        </a>
-
-                        <form
-                            action="{{ route('obras.deletar', $obra->id) }}"
-                            method="POST"
-                            class="form-excluir m-0">
-
-                            @csrf
-                            @method('DELETE')
-
-                            <button
-                                type="submit"
-                                class="btn btn-danger btn-sm">
-
-                                <i class="bi bi-trash"></i>
-                                Excluir
-
-                            </button>
-
-                        </form>
+                        <div class="d-flex gap-3 align-items-center" >
+                            <a
+                                href="{{ route('obras.alterar', $obra->id) }}"
+                                class="d-flex align-items-center btn btn-outline-primary btn-sm" style="max-height: 35px">
+                                <i class="bi bi-pencil"></i>
+                                Alterar
+                            </a>
+                            
+                            <a href="{{ route('avaliacoes.obra', $obra->id) }}"
+                            class="d-flex align-items-center btn btn-outline-warning btn-sm" style="max-height: 35px">
+                                <i class="bi bi-star"></i>
+                                Avaliações
+                            </a>
+                            @if($favoritado)
+                                <form
+                                    action="{{ route('favoritos.excluir', $obra->id) }}"
+                                    method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        type="submit"
+                                        class="d-flex align-items-center btn border-0 bg-transparent p-0 favorito-btn">
+                                        <i
+                                            class="bi bi-heart-fill text-danger"
+                                            style="font-size: 1.8rem;">
+                                        </i>
+                                    </button>
+                                </form>
+                            @else
+                                <form
+                                    action="{{ route('favoritos.salvar', $obra->id) }}"
+                                    method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    <button
+                                        type="submit"
+                                        class="d-flex align-items-center btn border-0 bg-transparent p-0 favorito-btn">
+                                        <i
+                                            class="bi bi-heart"
+                                            style="font-size: 1.8rem;">
+                                        </i>
+                                    </button>
+                                </form>
+                            @endif
+                            @if(session('favorito_sucesso'))
+                                <span
+                                    id="mensagem-favorito"
+                                    class="ms-1 text-pink fw-semibold">
+                                    Favoritado
+                                </span>
+                            @endif
+                            @if(session('favorito_removido'))
+                                <span
+                                    id="mensagem-favorito"
+                                    class="ms-1 text-secondary fw-semibold">
+                                    Removido
+                                </span>
+                            @endif
+                        </div>
 
                     </div>
-                  </div>
 
                     <span class="badge bg-secondary mb-3">
                         {{ $obra->tipo }}
@@ -111,7 +137,7 @@
                             <i class="bi bi-star"></i>
                         @endfor
 
-                        <span class="text-body ms-2">
+                        <span class="ms-2">
                             {{ number_format($obra->nota_media, 1) }}/10
                         </span>
 
@@ -172,5 +198,23 @@
     </div>
 
 </div>
+    <script>
 
+    setTimeout(() => {
+
+        const mensagem =
+            document.getElementById('mensagem-favorito');
+
+        if (mensagem) {
+
+            mensagem.style.transition =
+                'opacity 0.5s ease';
+
+            mensagem.style.opacity = '0';
+
+        }
+
+    }, 2000);
+
+    </script>
 @endsection

@@ -74,5 +74,65 @@ class FavoritoController extends Controller
         }
     }
 
+    public function favoritarTela($obraId)
+    {
+        $token = session('jwt_token');
+
+        $usuario = auth('api')
+            ->setToken($token)
+            ->user();
+
+        $favorito = Favorito::where('usuario_id', $usuario->id)
+            ->where('obra_id', $obraId)
+            ->first();
+
+        if (!$favorito) {
+
+            Favorito::create([
+                'usuario_id' => $usuario->id,
+                'obra_id' => $obraId
+            ]);
+
+        }
+
+        return redirect()
+        ->back()
+        ->with('favorito_sucesso', true);
+    }
+
+    public function removerTela($obraId)
+    {
+        $token = session('jwt_token');
+
+        $usuario = auth('api')
+            ->setToken($token)
+            ->user();
+
+        Favorito::where('usuario_id', $usuario->id)
+            ->where('obra_id', $obraId)
+            ->delete();
+
+        return redirect()
+    ->back()
+    ->with('favorito_removido', true);
+    }
+
+    public function listarTela()
+    {
+        $token = session('jwt_token');
+
+        auth('api')->setToken($token);
+
+        $usuario = auth('api')->user();
+
+        $favoritos = Favorito::with('obra')
+            ->where('usuario_id', $usuario->id)
+            ->get();
+
+        return view('favoritos.listar', [
+            'title' => 'Meus Favoritos',
+            'favoritos' => $favoritos
+        ]);
+    }
     
 }

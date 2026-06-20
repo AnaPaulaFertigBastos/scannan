@@ -71,6 +71,16 @@
                             <li>
                                 <a
                                     class="dropdown-item"
+                                    href="{{ route('favoritos.listar') }}">
+
+                                    Meus Favoritos
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    class="dropdown-item"
                                     href="{{ route('usuario.senha') }}">
 
                                     Alterar Senha

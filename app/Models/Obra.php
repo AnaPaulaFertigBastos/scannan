@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Favorito;
 use Illuminate\Database\Eloquent\Model;
 
 class Obra extends Model
@@ -34,10 +34,18 @@ class Obra extends Model
         );
     }
     public function avaliacoes()
-{
-    return $this->hasMany(
-        Avaliacao::class,
-        'obra_id'
-    );
-}
+    {
+        return $this->hasMany(
+            Avaliacao::class,
+            'obra_id'
+        );
+    }
+
+    public function favoritos()
+    {
+        return $this->hasMany(
+            Favorito::class,
+            'obra_id'
+        );
+    }
 }

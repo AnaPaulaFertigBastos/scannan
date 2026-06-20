@@ -11,4 +11,12 @@ class Favorito extends Model
         'usuario_id',
         'obra_id'
     ];
+
+    public function obra()
+    {
+        return $this->belongsTo(
+            Obra::class,
+            'obra_id'
+        );
+    }
 }

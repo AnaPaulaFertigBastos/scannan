@@ -69,6 +69,24 @@
                                 <i class="bi bi-star"></i>
                                 Avaliações
                             </a>
+                            <form
+                            action="{{ route('obras.deletar', $obra->id) }}"
+                            method="POST"
+                            class="form-excluir m-0">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger btn-sm">
+
+                                <i class="bi bi-trash"></i>
+                                Excluir
+
+                            </button>
+
+                        </form>
                             @if($favoritado)
                                 <form
                                     action="{{ route('favoritos.excluir', $obra->id) }}"

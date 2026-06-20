@@ -47,7 +47,7 @@
                     <div class="dropdown">
 
                         <button
-                            class="btn dropdown-toggle"
+                            class="btn dropdown-toggle fw-semibold"
                             type="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false">

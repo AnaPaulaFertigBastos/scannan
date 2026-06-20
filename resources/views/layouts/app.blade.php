@@ -160,52 +160,6 @@
         @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    document.querySelectorAll('.form-excluir').forEach(form => {
-
-        form.addEventListener('submit', function(e) {
-
-            e.preventDefault();
-
-            Swal.fire({
-                title: 'Confirmar exclusão',
-                text: 'Esta ação não poderá ser desfeita.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#029296',
-                cancelButtonColor: '#dc3545',
-                confirmButtonText: 'Sim, excluir',
-                cancelButtonText: 'Cancelar',
-                reverseButtons: true
-            }).then((result) => {
-
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-
-            });
-
-        });
-
-    });
-
-
-    setTimeout(() => {
-
-        document
-            .querySelectorAll('.auto-close-alert')
-            .forEach(alert => {
-
-                alert.classList.remove('show');
-
-                setTimeout(() => {
-                    alert.remove();
-                }, 300);
-
-            });
-
-    }, 3000);
-
-    </script>
+    
 </body>
 </html>

@@ -54,7 +54,7 @@
                             {{ $obra->titulo }}
                         </h1>
 
-                      <a
+                        <a
                             href="{{ route('obras.alterar', $obra->id) }}"
                             class="btn btn-outline-primary btn-sm">
 
@@ -62,78 +62,85 @@
                             Alterar
 
                         </a>
-                        
+                            
+                        <a href="{{ route('avaliacoes.obra', $obra->id) }}"
+                        class="btn btn-outline-warning btn-sm">
 
-                   @if($favoritado)
+                            <i class="bi bi-star"></i>
+                            Avaliações
 
-                        <form
-                            action="{{ route('favoritos.excluir', $obra->id) }}"
-                            method="POST"
-                            class="d-inline">
+                        </a>
 
-                            @csrf
-                            @method('DELETE')
+                    @if($favoritado)
 
-                            <button
-                                type="submit"
-                                class="btn border-0 bg-transparent p-0 favorito-btn">
+                            <form
+                                action="{{ route('favoritos.excluir', $obra->id) }}"
+                                method="POST"
+                                class="d-inline">
 
-                                <i
-                                    class="bi bi-heart-fill text-danger"
-                                    style="font-size: 1.8rem;">
-                                </i>
+                                @csrf
+                                @method('DELETE')
 
-                            </button>
+                                <button
+                                    type="submit"
+                                    class="btn border-0 bg-transparent p-0 favorito-btn">
 
-                        </form>
+                                    <i
+                                        class="bi bi-heart-fill text-danger"
+                                        style="font-size: 1.8rem;">
+                                    </i>
 
-                    @else
+                                </button>
 
-                        <form
-                            action="{{ route('favoritos.salvar', $obra->id) }}"
-                            method="POST"
-                            class="d-inline">
+                            </form>
 
-                            @csrf
+                        @else
 
-                            <button
-                                type="submit"
-                                class="btn border-0 bg-transparent p-0 favorito-btn">
+                            <form
+                                action="{{ route('favoritos.salvar', $obra->id) }}"
+                                method="POST"
+                                class="d-inline">
 
-                                <i
-                                    class="bi bi-heart"
-                                    style="font-size: 1.8rem;">
-                                </i>
+                                @csrf
 
-                            </button>
+                                <button
+                                    type="submit"
+                                    class="btn border-0 bg-transparent p-0 favorito-btn">
 
-                        </form>
+                                    <i
+                                        class="bi bi-heart"
+                                        style="font-size: 1.8rem;">
+                                    </i>
 
-                    @endif
+                                </button>
 
-                    @if(session('favorito_sucesso'))
+                            </form>
 
-                        <span
-                            id="mensagem-favorito"
-                            class="ms-1 text-pink fw-semibold">
+                        @endif
 
-                            Favoritado
+                        @if(session('favorito_sucesso'))
 
-                        </span>
+                            <span
+                                id="mensagem-favorito"
+                                class="ms-1 text-pink fw-semibold">
 
-                    @endif
+                                Favoritado
 
-                    @if(session('favorito_removido'))
+                            </span>
 
-                        <span
-                            id="mensagem-favorito"
-                            class="ms-1 text-secondary fw-semibold">
+                        @endif
 
-                            Removido
+                        @if(session('favorito_removido'))
 
-                        </span>
+                            <span
+                                id="mensagem-favorito"
+                                class="ms-1 text-secondary fw-semibold">
 
-                    @endif
+                                Removido
+
+                            </span>
+
+                        @endif
 
                 </div>
 

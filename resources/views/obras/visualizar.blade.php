@@ -50,7 +50,7 @@
 
                     <div class="d-flex justify-content-between mb-2 flex-wrap">
 
-                        <div class="">
+                        <div class="mb-2 mt-2">
                             <h1 class="fw-bold m-0">
                                 {{ Str::limit($obra->titulo, 22) }}
                             </h1>

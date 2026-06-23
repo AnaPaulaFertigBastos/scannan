@@ -26,7 +26,7 @@
 
             @if(session('jwt_token'))
 
-                <div class="d-flex align-items-center gap-4 ms-auto">
+                <div class="d-flex align-items-center gap-2 ms-auto flex-wrap justify-center">
 
                     <a
                         href="{{ route('autores.listar') }}"

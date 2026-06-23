@@ -88,6 +88,11 @@ class ObraController extends Controller
            
         }
 
+        $autor = Autor::select('nome')
+            ->find($obra->autor_id);
+
+        $tema = Tema::select('descricao')
+            ->find($obra->tema_id);
         //CALCULAR MÉDIA
         $notaMedia = $obra->avaliacoes()
                         ->avg('nota');
@@ -116,7 +121,9 @@ class ObraController extends Controller
         return view('obras.visualizar', [
             'title' => $obra->titulo,
             'obra' => $obra,
-            'favoritado' => $favoritado
+            'favoritado' => $favoritado,
+            'autor' => $autor,
+            'tema' => $tema
         ]);
         }
         catch(Exception $e) {

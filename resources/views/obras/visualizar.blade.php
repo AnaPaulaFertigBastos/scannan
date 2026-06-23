@@ -48,7 +48,7 @@
                 {{-- DADOS --}}
                 <div class="col-md-9" >
 
-                    <div class="d-flex justify-content-between mb-2">
+                    <div class="d-flex justify-content-between mb-2 flex-wrap">
 
                         <div class="">
                             <h1 class="fw-bold m-0">
@@ -56,7 +56,7 @@
                             </h1>
                         </div>
 
-                        <div class="d-flex gap-3 align-items-center" >
+                        <div class="d-flex gap-3 align-items-center flex-wrap" >
                             <a
                                 href="{{ route('obras.alterar', $obra->id) }}"
                                 class="d-flex align-items-center btn btn-outline-primary btn-sm" style="max-height: 35px">
@@ -171,6 +171,21 @@
 
                     </div>
 
+
+                    <div class="mb-2">
+
+                        <strong>Autor:</strong>
+                        {{ $autor->nome }}
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <strong>Tema:</strong>
+                        {{ $tema->descricao }}
+
+                    </div>
+
                     {{-- LIVRO --}}
                     @if($obra->tipo === 'Livro')
 
@@ -183,6 +198,7 @@
 
                     @endif
 
+                    
                     {{-- SÉRIE --}}
                     @if($obra->tipo === 'Serie' && $obra->temporada)
 
